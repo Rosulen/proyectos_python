@@ -42,19 +42,17 @@ plt.show() # mostar la gráfica de x
 ```
 ### Lectura, grabar y gráficar audio
 
-Para reproducir un audio se utiliza la libreria y el comando playspund
-
-```py
-from playsound import playsound
-
-playsound('ubicación del archivo')
-```
-
-Para 
-
 ver el archivo [Leer, gráficar y recortar audio](./read_audio.py)
+
 ver el archivo [grabar un audio y guardarlo](./write_audio.py)
 
 ### Operaciones con audios
 
 ver el archivo [suma de audios](./suma.py)
+
+### FFT
+
+Para hacer la transformada rápida de fourier con dos señales
+
+ver archivo [transformada de fourier de dos señales](./fft.py)
+
