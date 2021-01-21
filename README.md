@@ -56,3 +56,10 @@ Para hacer la transformada rápida de fourier con dos señales
 
 ver archivo [transformada de fourier de dos señales](./fft.py)
 
+ver archivo [tranformada de fourier aplicada a audios](./fft_audio.py)
+
+## Filtros 
+
+Ver archivo [filtros pasa altos y pasa bajos](./high_low_filters.py)
+
+ver archivo [filtros pasabanda y rechaza banda](./pass_stop_filters.py)
