@@ -1,3 +1,5 @@
+# Guia herramientas básicas de dps con python
+
 ### Creación de vectores y graficación
 
 Para reconocer los valores como en matlab se usa la libreria numpy, algunas de las operaciones básicas y necesarias con vectores son:
@@ -63,3 +65,6 @@ ver archivo [tranformada de fourier aplicada a audios](./fft_audio.py)
 Ver archivo [filtros pasa altos y pasa bajos](./high_low_filters.py)
 
 ver archivo [filtros pasabanda y rechaza banda](./pass_stop_filters.py)
+
+# Interface gráfica con python (tk-inter)
+
