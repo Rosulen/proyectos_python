@@ -68,3 +68,59 @@ ver archivo [filtros pasabanda y rechaza banda](./pass_stop_filters.py)
 
 # Interface gráfica con python (tk-inter)
 
+## Mostrar un ventana sencilla, con texto adentro
+
+```py
+
+import tkinter as tk
+
+ventana = tk.Tk()
+ventana = tk.Frame(height=20,width=100, cursor="arrow") # Tamaño de la ventana
+ventana.pack(padx=100,pady=100) # Contenedor de la ventana
+texto = tk.Label(ventana,text="ventana de prueba", foreground='black') # Tenxo que va dentro de la ventana
+texto.pack()
+
+ventana.mainloop() # Mostrar ventana
+```
+<p align="center"> <img src=./imagenes/ventana.png> </p>
+
+## Creación de botones y cuadros de texto
+
+```py
+
+import tkinter as tk
+
+## Creación de botones
+# En estos dos parametros se se define también el tipo de letra, tamaño y la posición dondé se imprimirá el resultado
+
+def saludar():
+    lblsaludar = tk.Label(ventana, text="Hola " + usuario.get(),font=("Consolas", 14)).place(x=10, y=150) # Definir los valores a imprimir cuando se presione el boton saludar, debe imprimir "Hola Camila"
+
+def despedir():
+    lbldespedir = tk.Label(ventana,text="Chao " + nombre.get(),font=("Consolas", 14)).place(x=10, y=200) # Definir los valores a imprimir cuando se presione el boton despedir, debe imprimir "Chao Rosulen"
+
+ventana = tk.Tk()
+ventana.geometry("500x300+100+200") # Geometria de la ventana
+ventana.title("Nombre del formulario") # Nombre de la interface
+
+lblusuario1 = tk.Label(text="Usuario", fg="black", font=("Consolas",14)).place(x=10,y=10) # Ponet la palabra usuario en el formulario
+usuario = tk.StringVar() # Creando cuadro de texto para campo de respuesta 
+usuario.set("Camila") # Llenar el cuadro de texto
+txtusuario = tk.Entry(ventana, textvariable = usuario).place(x=90,y=13) # Tamaña del cuadro de texto
+
+# Se repite el mismo procedimiento para los cuadros de texto restantes 
+lblnombre = tk.Label(text="Nombre", fg="black", font=("Consolas",14)).place(x=10,y=50)
+nombre = tk.StringVar()
+nombre.set("Rosulen")
+txtnombre = tk.Entry(ventana, textvariable = nombre).place(x=90,y=53)
+
+btnsaludar = tk.Button(ventana,text="Saludar",command=saludar,font=("Agency FB",14)).place(x=100,y=100) # Creación del boton saludar 
+btnsdespedir= tk.Button(ventana,text="Despedir",command=despedir,font=("Agency FB",14),).place(x=300,y=100) # Creación del boton despedir
+
+ventana.mainloop() # Mostrar ventana
+
+```
+
+<p align="center"> <img src=./imagenes/formulario.png> </p>
+
+

@@ -1,5 +1,2 @@
-alejandro.wav
-miguel.wav
-nombre.wav
-saludo.wav
-suma.wav
+*.wav
+/imagenes
