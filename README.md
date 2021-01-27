@@ -118,9 +118,250 @@ btnsaludar = tk.Button(ventana,text="Saludar",command=saludar,font=("Agency FB",
 btnsdespedir= tk.Button(ventana,text="Despedir",command=despedir,font=("Agency FB",14),).place(x=300,y=100) # Creación del boton despedir
 
 ventana.mainloop() # Mostrar ventana
-
 ```
 
 <p align="center"> <img src=./imagenes/formulario.png> </p>
 
+## Poner imagenes en botones
 
+---
+FALTA 
+---
+
+## Check botton en python
+
+```py
+from tkinter import *
+
+def lenguajes(): # Esta función imprime los valores asignados de los botones selesccionados en consola
+
+    c=selc.get()
+    cc=selecc.get()
+    java=seljava.get()
+    ruby=seleruby.get()
+    php=selephp.get()
+    python=selpython.get()
+    print(c)
+    print(cc)
+    print(java)
+    print(ruby)
+    print(php)
+    print(python)
+
+    if(c==1): # si el primero está seleccionado, entonces la ventana se cerrará
+        ventana.destroy()
+        
+ventana=Tk()
+ventana.geometry("500x500+100+100")
+ventana.title("Ejemplo checkbutton")
+lblpregunta=Label(ventana,text="Que lenguajes conoces").place(x=100,y=40)
+
+#creando los checkbox
+selc=IntVar()
+selecc=IntVar()
+seljava=IntVar()
+seleruby=IntVar()
+selpython=IntVar()
+selephp=IntVar()
+
+chkc=Checkbutton(ventana,text="c",variable=selc, # La variable selc es la variable que pbtendrá el valor del boton
+                   onvalue=1,offvalue=0).place(x=100,y=60)
+chkcc=Checkbutton(ventana,text="c++",variable=selecc,
+                   onvalue=1,offvalue=0).place(x=100,y=80)
+chkjava=Checkbutton(ventana,text="java",variable=seljava,
+                   onvalue=1,offvalue=0).place(x=100,y=100)
+chkruby=Checkbutton(ventana,text="ruby",variable=seleruby,
+                   onvalue=1,offvalue=0).place(x=100,y=120)
+chkpython=Checkbutton(ventana,text="python",variable=selpython,
+                   onvalue=1,offvalue=0).place(x=100,y=140)
+chkphp=Checkbutton(ventana,text="php",variable=selephp,
+                   onvalue=1,offvalue=0).place(x=100,y=160)
+
+btnlenguajes=Button(ventana,text="Cuales Seleccione",command=lenguajes # Se crea un boton que redirecciona a la funcion lenguajes
+                    ).place(x=100,y=220)
+
+ventana.mainloop()
+```
+
+<p align="center"> <img src=./imagenes/seleccionar_check.png> </p>
+
+## Radio button
+
+```py
+
+from tkinter import *
+from tkinter import messagebox
+
+def estado():
+    s=selec.get()
+    
+    #tkMessageBox.showinfo(title="Tu Diagnostico",message="HOY  "+str(s))
+
+    if s==1:
+        messagebox.showinfo(title="Tu Diagnostico", message="Exelente")
+    elif s==2:
+        messagebox.showinfo(title="Tu Diagnostico", message="Muy Bien")
+    elif s==3:
+        messagebox.showinfo(title="Tu Diagnostico",message="Bien")
+    elif s==4:
+        messagebox.showinfo(title="Tu Diagnostico", message="hola bienvenido")    
+    elif s==5:
+        messagebox.showinfo(title="Tu Diagnostico",  message="Muy Mal")
+    
+ventana=Tk()
+
+ventana.geometry("500x500+100+100")
+ventana.title("Ejemplo radiobutton")
+
+## crear radio button
+lblanime=Label(ventana,text="como te sientes hoy"
+               ).place(x=100,y=70)
+
+selec=IntVar()
+rdbanimoE=Radiobutton(ventana,text="Exclente",
+                     value=1,variable=selec,command=estado).place(x=100,y=100) # se pone el valor que tomará una vez esté activado
+rdbanimoMB=Radiobutton(ventana,text="Muy Bien",
+                     value=2,variable=selec,command=estado).place(x=100,y=130)
+rdbanimoB=Radiobutton(ventana,text="Bien",
+                     value=3,variable=selec,command=estado).place(x=100,y=160)
+rdbanimoM=Radiobutton(ventana,text="Mal",
+                     value=4,variable=selec,command=estado).place(x=100,y=190)
+rdbanimoP=Radiobutton(ventana,text="Muy Mal",
+                     value=5,variable=selec,command=estado).place(x=100,y=220)
+
+ventana.mainloop()
+```
+
+<p align="center"> <img src=./imagenes/seleccionar_radio.png> </p> <p align="center"> <img src=./imagenes/seleccionar_radio1.png> </p>
+
+## Agregar Imagen a un boton
+
+```py
+from tkinter import *
+from tkinter import messagebox
+
+def saluda():
+    messagebox.showinfo("saludando con messagebox",message="hola bienvenido")
+
+ventana=Tk()
+ventana.geometry("500x500+100+100")
+ventana.title("Ejemplo imagen a botton y messagebox")
+
+imgbottoon=PhotoImage(file="imagen.gif")
+btnsaluda=Button(ventana,image=imgbottoon,command=saluda,height=312,width=344).place(x=100,y=100)
+
+ventana.mainloop()
+```
+
+<p align="center"> <img src=./imagenes/boton_imagen.png> </p>
+
+Una vez se da clic en el boton con la imagen, como resulatado se obtiene un mensaje flotante
+
+<p align="center"> <img src=./imagenes/boton_mensaje.png> </p>
+
+## Creación de slider
+
+```py
+from tkinter import *
+from tkinter import messagebox
+
+def temperatura(): # Muestra un mensaje del valor de la temperatura
+    temper="Estamos a "+ str(valor.get())
+    print(temper)
+    messagebox.showinfo(title="temperatura",message=temper)
+
+ventana=Tk()
+ventana.geometry("500x500+100+100")
+ventana.title("Ejemplo slider")
+
+## Creacion del slider
+
+valor=IntVar()
+sldbarra=Scale(ventana,label="Temperaturas C",orient=HORIZONTAL,length=350,width=25,from_=-15,to=50,tickinterval=10,variable=valor).place(x=100,y=100) # Titulo del slider, se selecciona si es horizontal o vertical, tamaño, de que valor a que valor y los intervalos en los que va a crecer  
+btnver=Button(ventana,text="Ver temperatura",command=temperatura).place(x=100,y=200) # Boton que llama a la función temperatura
+
+ventana.mainloop()
+```
+<p align="center"> <img src=./imagenes/slider.png> </p>
+
+## spinbox
+
+```py
+from tkinter import *
+
+ventana=Tk()
+ventana.geometry("500x300+100+100")
+ventana.title("Ejemplo spinbox")
+
+## Creando un spinbox de palabras
+lblcalifT=Label(text="calificaciones en texto:",fg="blue",
+               font=("Agency FB",14) ).place(x=20,y=100) # El texto
+spncaliT=Spinbox(ventana,values=("Reprobado","Setenta",
+                                 "Ochenta","Noventa","Cien")) # Las opciones que trandrá la caja
+
+#concatenar el 88
+spncaliT.insert(END,"88") # concatenar en número 88 en la primera casilla
+spncaliT.place(x=280,y=105)
+
+
+lblcalifN=Label(text="calificaciones en numero:",fg="blue",
+               font=("Agency FB",14) ).place(x=20,y=150) # E texto
+spncaliN=Spinbox(ventana,from_=70,to=100).place(x=280,y=155) # Las opciones de numeros, la minima es 70 y la maxima es 100
+
+ventana.mainloop()
+```
+
+<p align="center"> <img src=./imagenes/spinbox.png> </p>
+
+## Creación de menus
+
+```py
+
+from tkinter import *
+
+def abrir():
+    print ("hiciste clic en abrir")
+    venabrir=Tk()
+    venabrir.geometry("400x200+200+200")
+    venabrir.title("otra ventana")
+    venabrir.mainloop()
+
+ventana=Tk()
+ventana.geometry("600x600+100+100")
+ventana.title("Ejemplo menus")
+
+## Pasos para crear un menú
+
+# Paso 1 crear la barra de menus
+barramenu=Menu(ventana)
+
+# Paso 2 crear los menus
+mnuarchivo=Menu(barramenu)
+mnuedicion=Menu(barramenu)
+
+# Paso 3 crear los comandos de los menus
+# Menú archivo
+mnuarchivo.add_command(label="Abrir",command=abrir)
+mnuarchivo.add_command(label="Nuevo")
+mnuarchivo.add_command(label="Guardar")
+mnuarchivo.add_command(label="Cerrar")
+mnuarchivo.add_separator() # Hacer una divición en el menú
+mnuarchivo.add_command(label="Salir",command=ventana.destroy)
+
+# Menú edición
+mnuedicion.add_command(label="Copiar")
+mnuedicion.add_command(label="Pegar")
+mnuedicion.add_command(label="Deshacer")
+mnuedicion.add_command(label="Rehacer")
+
+# Paso 4 agergar los menus a la barra de menus
+barramenu.add_cascade(label="Arcivo",menu=mnuarchivo)
+barramenu.add_cascade(label="Edicion",menu=mnuedicion)
+
+# Paso 5 indicamos que la barra de menus estara en la ventana
+ventana.config(menu=barramenu)
+
+ventana.mainloop()
+```
+
+<p align="center"> <img src=./imagenes/menu.png> </p>
