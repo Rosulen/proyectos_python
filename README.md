@@ -363,5 +363,4 @@ ventana.config(menu=barramenu)
 
 ventana.mainloop()
 ```
-
 <p align="center"> <img src=./imagenes/menu.png> </p>

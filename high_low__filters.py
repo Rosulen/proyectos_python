@@ -10,11 +10,12 @@ from scipy.fft import fft, fftfreq
 from playsound import playsound
 
 ## Reproducir audio
-playsound('/home/angie/Git/python_dsp/alejandro.wav')
+playsound('/home/angie/Git/python_dsp/sin_titulo.wav')
 
 ## trear, extraer y gráficar los datos de audio
-fs, data = wavfile.read("alejandro.wav") 
-
+fs, data = wavfile.read("sin_titulo.wav") 
+"""data,n = np.split(data, 2, axis=1)
+data = np.transpose(y) """
 plt.figure(1)
 plt.plot(data)
 plt.grid()
@@ -36,7 +37,7 @@ plt.grid()
 
 nyq = fs * 0.5
 
-cutoff = 1500
+cutoff = 150
 stopfreq = float(cutoff)
 cornerfreq = 0.4 * stopfreq # (?)
 
