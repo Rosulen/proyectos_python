@@ -20,12 +20,12 @@ def grabar():
     global y, fs
 
     fs = 8000  # Sample rate
-    seconds = 10  # Duration of recording
-    lblgrabando = Label(ventana, text="Grabando...",font=("Consolas", 14)).place(x=150, y=550)
+    seconds = 10
     print("grabando")
     myrecording = sd.rec(int(seconds * fs), samplerate=fs, channels=1)
     sd.wait()  # Wait until recording is finished
     wavio.write('audio.wav', myrecording, fs, sampwidth=3)  # Save as WAV file
+    print("Guardado")
 
     # Traer datos de audio
     fs, y = wavfile.read("audio.wav")
@@ -80,7 +80,7 @@ def grabar():
 
 def procesar():
 
-    global y, fs
+    global y, fs, n_palabras, pos
 
     n = 0
     l = len(y)
@@ -124,7 +124,7 @@ def procesar():
     pos = []
     contador = 0
 
-    # reemplazar valores que no deben estas, falta revisión
+    # reemplazar valores que no deben estar, falta revisión
     for j in senal_cuadrada:
 
         if j != senal_cuadrada[contador-1]:
@@ -183,18 +183,54 @@ def procesar():
             wavio.write(actualname, y[pos[contador]:pos[contador+1]], fs, sampwidth=3)
 
         i += 1
-        contador += 2        
- 
+        contador += 2
+    
+    print(pos)
+    return n_palabras, pos
+
+        
+
+def mostrar():
+
+    global n_palabras, audio, pos, fs
+    
+    audio = audio.get()
+
+    n = int(str(audio))
+
+    posicion = n + n -2
+
+    if n > n_palabras or n < 1:
+        print(f'Ingrese un número entre {1} y {n_palabras}')
+    else:
+        tamaño = y[pos[posicion]:pos[posicion+1]]
+        wavio.write('pruebax.wav', tamaño, fs, sampwidth=3)  # Save as WAV file
+        playsound('/home/angie/Git/python_dsp/principio_fin_palabra/pruebax.wav')
+        plt.figure(1)
+        plt.plot(tamaño)
+        plt.show()
+
+    
+
+
+
 ventana = Tk()
 
-ventana.geometry("600x600+100+200") # Geometria de la ventana
-ventana.title("Nombre del formulario") # Nombre de la interface
+ventana.geometry("400x200+100+200") # Geometria de la ventana
+ventana.title("Principio y fin de palabra") # Nombre de la interface
 
-img = PhotoImage(file="senal_data.png")
+lblaudio = Label(text="Mostrar: ", fg="black", font=("Consolas",14)).place(x=30,y=100)
+audio = StringVar()
+txtaudio = Entry(ventana, textvariable = audio).place(x=210,y=100)
+
+
+""" img = PhotoImage(file="senal_data.png")
 widget = Label(ventana, image=img).pack()
-
+ """
 # creación bontones
-btngrabar = Button(ventana,text="Grabar",command = grabar,font=("Consolas",14)).place(x=100,y=500) # Creación del boton saludar 
-btnprocesar = Button(ventana,text="Procesar",command = procesar,font=("Consolas",14)).place(x=300,y=500) # Creación del boton saludar 
+btngrabar = Button(ventana,text="Grabar", bg="pink",command = grabar,font=("Consolas",14)).place(x=50,y=50) # Creación del boton saludar 
+btnprocesar = Button(ventana,text="Procesar", bg="pink",command = procesar,font=("Consolas",14)).place(x=250,y=50) # Creación del boton saludar 
+btnescuchar = Button(ventana,text="Mostrar", bg="pink",command = mostrar,font=("Consolas",14)).place(x=100,y=150) # Creación del boton saludar 
+
 
 ventana.mainloop() # Mostrar ventana
