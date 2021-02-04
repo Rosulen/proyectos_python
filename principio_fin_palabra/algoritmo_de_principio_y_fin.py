@@ -1,3 +1,6 @@
+## Camila Ojeda
+## 3 de febrero de 2020
+
 import sounddevice as sd
 import matplotlib.pylab as plt
 import scipy.io.wavfile as wavfile
@@ -13,11 +16,12 @@ from tkinter import *
 from playsound import playsound 
 from scipy import signal
 from scipy.fft import fft, fftfreq
+from PIL import ImageTk,Image
 
 # Creación de la ventana
 def grabar():
 
-    global y, fs
+    global y, fs, img
 
     fs = 8000  # Sample rate
     seconds = 10
@@ -70,10 +74,18 @@ def grabar():
     plt.figure(1)
     plt.plot(sf) # Imprimir audio filtrado en el dominio del tiempo
     plt.title("Señal obtenida")
-    
-    plt.savefig("senal_data.png") # Guardar como imagen
 
-    plt.show()
+    plt.savefig("imagenes/senal_data.png") # Guardar como imagen
+    
+    img = Image.open("imagenes/senal_data.png")
+    img.save("imagenes/senal_data.png")
+    imagen = img.resize((500, 400), Image.ANTIALIAS)
+    img = ImageTk.PhotoImage(imagen)
+    
+
+    lblimagen = Label(ventana, image=img).place(x=10,y=10)
+
+    #plt.show()
 
     return y, fs
 
@@ -107,7 +119,7 @@ def procesar():
 
     # Pasar señal cuadrada
     for p in vec_energia:
-        if p < 30:
+        if p < 3:
             senal_cuadrada.append(0)
 
         else:
@@ -189,14 +201,12 @@ def procesar():
     return n_palabras, pos
 
         
-
 def mostrar():
 
     global n_palabras, audio, pos, fs
     
-    audio = audio.get()
-
-    n = int(str(audio))
+    
+    n = int(str(audio.get()))
 
     posicion = n + n -2
 
@@ -211,26 +221,23 @@ def mostrar():
         plt.show()
 
     
-
-
-
 ventana = Tk()
 
-ventana.geometry("400x200+100+200") # Geometria de la ventana
+ventana.geometry("520x600+100+200") # Geometria de la ventana
 ventana.title("Principio y fin de palabra") # Nombre de la interface
 
-lblaudio = Label(text="Mostrar: ", fg="black", font=("Consolas",14)).place(x=30,y=100)
+lblaudio = Label(text="Mostrar: ", fg="black", font=("Consolas",14)).place(x=120,y=540) # 70 100
 audio = StringVar()
-txtaudio = Entry(ventana, textvariable = audio).place(x=210,y=100)
-
+txtaudio = Entry(ventana, textvariable = audio).place(x=210,y=540) # 170 100
 
 """ img = PhotoImage(file="senal_data.png")
 widget = Label(ventana, image=img).pack()
  """
+
 # creación bontones
-btngrabar = Button(ventana,text="Grabar", bg="pink",command = grabar,font=("Consolas",14)).place(x=50,y=50) # Creación del boton saludar 
-btnprocesar = Button(ventana,text="Procesar", bg="pink",command = procesar,font=("Consolas",14)).place(x=250,y=50) # Creación del boton saludar 
-btnescuchar = Button(ventana,text="Mostrar", bg="pink",command = mostrar,font=("Consolas",14)).place(x=100,y=150) # Creación del boton saludar 
+btngrabar = Button(ventana,text="Grabar", bg="pink",command = grabar,font=("Consolas",14)).place(x=80,y=480) # 50 50
+btnprocesar = Button(ventana,text="Procesar", bg="pink",command = procesar,font=("Consolas",14)).place(x=190,y=480) # 250 50
+btnescuchar = Button(ventana,text="Mostrar", bg="pink",command = mostrar,font=("Consolas",14)).place(x=320,y=480) # 100 150
 
 
 ventana.mainloop() # Mostrar ventana
