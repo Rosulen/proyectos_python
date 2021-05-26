@@ -44,27 +44,27 @@ plt.show() # mostar la gráfica de x
 ```
 ### Lectura, grabar y gráficar audio
 
-ver el archivo [Leer, gráficar y recortar audio](./read_audio.py)
+ver el archivo [Leer, gráficar y recortar audio](./codigos/read_audio.py)
 
-ver el archivo [grabar un audio y guardarlo](./write_audio.py)
+ver el archivo [grabar un audio y guardarlo](./codigos/write_audio.py)
 
 ### Operaciones con audios
 
-ver el archivo [suma de audios](./suma.py)
+ver el archivo [suma de audios](./codigos/suma.py)
 
 ### FFT
 
 Para hacer la transformada rápida de fourier con dos señales
 
-ver archivo [transformada de fourier de dos señales](./fft.py)
+ver archivo [transformada de fourier de dos señales](./codigos/fft.py)
 
-ver archivo [tranformada de fourier aplicada a audios](./fft_audio.py)
+ver archivo [tranformada de fourier aplicada a audios](./codigos/fft_audio.py)
 
 ## Filtros 
 
-Ver archivo [filtros pasa altos y pasa bajos](./high_low_filters.py)
+Ver archivo [filtros pasa altos y pasa bajos](./codigos/high_low_filters.py)
 
-ver archivo [filtros pasabanda y rechaza banda](./pass_stop_filters.py)
+ver archivo [filtros pasabanda y rechaza banda](./codigos/pass_stop_filters.py)
 
 # Interface gráfica con python (tk-inter)
 
