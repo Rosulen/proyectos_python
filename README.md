@@ -1,4 +1,6 @@
-# Guia herramientas básicas de dps con python
+# Guia herramientas básicas de procesamiento digital de señales con python (DSP)
+
+# Procesamiento digital de señales en audios
 
 ### Creación de vectores y graficación
 
@@ -364,3 +366,194 @@ ventana.config(menu=barramenu)
 ventana.mainloop()
 ```
 <p align="center"> <img src=./imagenes/menu.png> </p>
+
+---
+# Procesamiento digital de señales en imagenes
+
+### leer y publicar una imagen
+
+Se usa la librería OpenCV
+
+```py
+import cv2 as cv 
+import sys
+
+img=cv.imread('/home/angie/Documents/git/python_dsp/imagen.png',0) ## El cero es para poner la imagen en blanco y negro
+cv.imshow('titulo de la ventanda',img) 
+
+while (True):
+    
+    k = cv.waitKey(1) & 0xFF
+
+    # Metodo de salida
+
+    if k==ord('e'):
+        cv2.destroyAllWindows()
+    elif k==ord('s'):
+        cv2.imwrite("hola.png",img) ## se guarda la imagen
+        cv2.destroyAllWindows()
+
+```
+Como la ventana queda en un loop infinito se debe poner un metodo de salida, en este caso será la tecla e, para salir y la tecla s para guardar
+
+<p align="center"> <img src=./imagenes/dog.png>
+
+```py
+img=cv.imread('/home/angie/Documents/git/python_dsp/imagen.png')
+```
+</p><p align="center"> <img src=./imagenes/dog2.png> </p>
+
+```py
+img=cv.imread('/home/angie/Documents/git/python_dsp/imagen.png',0)
+```
+
+### Slider y matrices de color
+
+```py
+import cv2
+import numpy as np
+
+def nothing(x):
+    pass
+
+# Creacion de matrices
+img = np.zeros((300,512,3), np.uint8) # Se crean 3 matrices de 300x512 con el valor de 0, es decir qua la imagen queda de color negro
+cv2.namedWindow('image') # Nombre de la ventana
+
+# Creacion de sliders para cambiar el color
+cv2.createTrackbar('R','image',0,255,nothing) # Creacion de slider que contiene los rojos desde 0 - 255
+cv2.createTrackbar('G','image',0,255,nothing) # Creacion de slider que contiene los verdes
+cv2.createTrackbar('B','image',0,255,nothing) # Creacion de slider que contiene los azules
+
+# Crear on off de programa
+switch = '0 : OFF \n1 : ON' # Swicth para prender y apagar el programa
+cv2.createTrackbar(switch, 'image',0,1,nothing) # el switch solo toma valores de 0 y 1
+
+while(1):
+
+    cv2.imshow('image',img)
+    k = cv2.waitKey(1) & 0xFF
+    if k == 27: # Si la tecla e está activada entonces se sale del while
+        break
+
+    # SE toman los velores del los slides
+    r = cv2.getTrackbarPos('R','image')
+    g = cv2.getTrackbarPos('G','image')
+    b = cv2.getTrackbarPos('B','image')
+    s = cv2.getTrackbarPos(switch,'image')
+
+    # Se verifica el estado del switch
+    if s == 0: # si está en 0 no hace nada
+        img[:] = 0
+    else:
+        img[:] = [b,g,r] # Si está en uno combina los colores y los publica
+
+cv2.destroyAllWindows()
+```
+El resultado será el siguiente, si el switch está apagado el resultado será el siguiente
+
+</p><p align="center"> <img src=./imagenes/slider_negro.png> </p>
+
+Si está encendido
+
+</p><p align="center"> <img src=./imagenes/slider_color.png> </p>
+
+El color del slider cambiará dependiendo de los valores del slider
+
+### BInarización de una imagen
+
+Hay varios tipos de metodos para binarizar una imágen, en el siguiente codigo se pueden ver 6 diferentes y como obtenerlos a travez del código.
+
+```py
+import cv2 as cv
+import numpy as np
+import matplotlib.pylab as plt
+
+img = cv.imread('/home/angie/Documents/git/python_dsp/imagen.png',0)
+ret,thresh1 = cv.threshold(img,60,120,cv.THRESH_BINARY)
+ret,thresh2 = cv.threshold(img,60,255,cv.THRESH_BINARY_INV)
+ret,thresh3 = cv.threshold(img,60,255,cv.THRESH_TRUNC)
+ret,thresh4 = cv.threshold(img,127,255,cv.THRESH_TOZERO)
+ret,thresh5 = cv.threshold(img,127,255,cv.THRESH_TOZERO_INV)
+
+titles = ['Original Image','BINARY','BINARY_INV','TRUNC','TOZERO','TOZERO_INV']
+images = [img, thresh1, thresh2, thresh3, thresh4, thresh5]
+
+for i in range(6):
+    
+     plt.subplot(2,3,i+1),plt.imshow(images[i],'gray')
+     plt.title(titles[i])
+     plt.xticks([]),plt.yticks([])
+
+plt.show()
+```
+El resultado será
+
+</p><p align="center"> <img src=./imagenes/binarizar_imagen.png> </p>
+
+### Uso de la camara
+
+```py
+import cv2
+import numpy as np
+from matplotlib import pyplot as plt
+
+
+cap=cv2.VideoCapture(2) ## puert de la camara
+while (True):
+    
+    rec,frame=cap.read()
+    
+
+    cv2.imshow('video',frame)
+    
+    if cv2.waitKey(1)  & 0xff==ord('q'):
+        break
+
+cap.release()
+
+cv2.destroyAllWindows()
+```
+
+### Video con binarización
+
+```py
+import cv2
+import numpy as np
+from matplotlib import pyplot as plt
+
+
+#cap=cv2.VideoCapture(0)
+cap1=cv2.VideoCapture(2)
+
+while (True):
+   # rec, frame=cap.read()
+    rec1, frame1=cap1.read()
+
+
+    #cv2.imshow('video1',frame)
+    cv2.imshow('video2',frame1)
+
+    #f= cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)#convierte a grises
+    #ret,thresh1 = cv2.threshold(f,127,255,cv2.THRESH_BINARY)
+    #cv2.imshow('video3',thresh1)
+
+
+    f= cv2.cvtColor(frame1,cv2.COLOR_BGR2GRAY)#convierte a grises
+    ret,thresh2 = cv2.threshold(f,127,255,cv2.THRESH_BINARY)
+    cv2.imshow('video4',thresh2)
+    
+    ret,thresh3 = cv2.threshold(f,60,255,cv2.THRESH_TRUNC)
+    cv2.imshow('video5',thresh3)
+    ret,thresh4 = cv2.threshold(f,127,255,cv2.THRESH_TOZERO)
+    cv2.imshow('video6',thresh4)
+    ret,thresh5 = cv2.threshold(f,127,255,cv2.THRESH_TOZERO_INV)
+    cv2.imshow('video7',thresh5)
+    
+    if cv2.waitKey(1)  & 0xff==ord('q'):
+        break
+
+#cap.release()
+cap1.release()
+cv2.destroyAllWindows()
+```
