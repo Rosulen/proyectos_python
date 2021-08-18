@@ -499,7 +499,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 
-cap=cv2.VideoCapture(2) ## puert de la camara
+cap=cv2.VideoCapture(2) ## puerto de la camara
 while (True):
     
     rec,frame=cap.read()

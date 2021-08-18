@@ -14,7 +14,7 @@ cv2.createTrackbar('Area','Valores',1,500,nothing)
 cambio_color = 0
 
 # Inicialización de variables y video
-cap1=cv2.VideoCapture(1)
+cap1=cv2.VideoCapture(0)
 rec1, frame1=cap1.read()
 frame1 = cv2.resize(frame1, (426,240) , interpolation =cv2.INTER_AREA)
 rectangulo = np.array([0,0,0,0])
@@ -43,26 +43,20 @@ def obtener_valores(event, x, y, etiquetas, parametros):
         while pos <= 1:
             if pos == 0:
                 rectangulo[contador2] = x
-
                 
             else:
-
                 rectangulo[contador2 + 1] = y
 
             contador = contador + 1
             pos = pos + 1
-
-
         
         contador2 = contador2 + 2
         if contador2 >= 3:
             contador2 = 0 
 
-
         pos = 0
         if contador%4 == 0:
             print(contador)
-
 
 # Creación de ventana y llamado a la funcion
 cv2.namedWindow(winname = 'Valores')
@@ -144,48 +138,6 @@ while(1):
                 # Dibujamos el rectángulo del bounds
                 cv2.rectangle(frame1, (x, y), (x + w, y + h), (0, 255, 0), 2)
                 cv2.imshow("Valores", frame1)
-
-
-        
-            # for c in contornos:
-            
-        #     print(cv2.contourArea(c))
-        #     #if cv2.contourArea(c) > 15:
-                
-        #         # Obtenemos el bounds del contorno, el rectángulo mayor que engloba al contorno
-        #     (x1, y1, x2, y2) = cv2.boundingRect(c)
-        #     cx = ((x2 - x1)/2) + x1
-        #     cy = ((y2 - y1)/2) + y1
-
-        #     while capacidad <= contador/4:
-                    
-        #         if x1 > rectangulo[coordenada] and x1 < rectangulo[coordenada + 2]:
-        #             if y1 > rectangulo[coordenada + 1] and y1 < rectangulo[coordenada + 3]:
-        #                 cambio_color = 1
-        #                     # print(f'x1 {x1}, rec {rectangulo[coordenada]}, rec {rectangulo[coordenada + 2]}' )
-        #                     # print(f'y1 {y1}, rec {rectangulo[coordenada + 1]}, rec {rectangulo[coordenada + 3]}')
-        #             else: cambio_color = 0
-
-        #         elif x2 + x1 > rectangulo[coordenada] and x2 + x1 < rectangulo[coordenada + 2]:
-        #             if y2 + y1 > rectangulo[coordenada + 1] and y2 + y1 < rectangulo[coordenada + 3]:
-        #                 # print("ooooook")
-        #                 cambio_color = 1
-        #                 # print(f'x2 {x2}, rec {rectangulo[coordenada]}, rec {rectangulo[coordenada + 2]}' )
-        #                 # print(f'y2 {y2}, rec {rectangulo[coordenada + 1]}, rec {rectangulo[coordenada + 3]}')
-        #             else: cambio_color = 0
-                 
-        #         elif cx > rectangulo[coordenada] and cx < rectangulo[coordenada + 2]:
-        #             if cy > rectangulo[coordenada + 1] and cy < rectangulo[coordenada + 3]:
-        #                 cambio_color = 1
-        #             else: cambio_color = 0
-
-        #         else: cambio_color = 0
-
-
-
-        #         # cv2.rectangle(frame1,(rectangulo[coordenada],rectangulo[pos+1]),(rectangulo[coordenada+2],rectangulo[coordenada+3]),(0,255,0),3)
-        #         coordenada = coordenada + 4
-        #         capacidad = capacidad + 1
 
     cv2.imshow('Valores',frame1) # imprimir imagen
     cv2.imshow('binarización',resta_b)

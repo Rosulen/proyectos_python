@@ -2,7 +2,7 @@ import numpy as np
 import cv2
  
 # Capturamos el vídeo
-cap = cv2.VideoCapture('detector-movimiento-opencv.mp4')
+cap = cv2.VideoCapture('video1.avi')
  
 # Llamada al método
 fgbg = cv2.bgsegm.createBackgroundSubtractorMOG(history=200, nmixtures=5, backgroundRatio=0.7, noiseSigma=0)
