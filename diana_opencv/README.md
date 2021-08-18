@@ -48,7 +48,7 @@ while(1):
 cap.release()
 cv2.destroyAllWindows()
 ```
-<p align="center"> <img src=./home/angie/Documents/git/python_dsp/diana_opencv/radioycontorno.png> </p>
+<p align="center"> <img src=./imagenes/radioycontorno.png> </p>
 
 ____
 ## Detección del brillos o laser
@@ -96,7 +96,7 @@ while(1):
 cap.release()
 cv2.destroyAllWindows()
 ```
-<p align="center"> <img src=./home/angie/Documents/git/python_dsp/diana_opencv/deteccion_brillos.png> </p>
+<p align="center"> <img src=./imagenes/deteccion_brillos.png> </p>
 
 _____
 ## Combinación de algoritmos
@@ -166,20 +166,20 @@ while(1):
 cap.release()
 cv2.destroyAllWindows()
 ```
-<p align="center"> <img src=./home/angie/Documents/git/python_dsp/diana_opencv/dilatacion.png> </p>
+<p align="center"> <img src=./imagenes/dilatacion.png> </p>
 
 ____
 ## Creación de la imagen digital
 
 Se crea una imagen digital exactamente igual a la diana original para poner la puntiación donde corresponde, las casillaes en blanco y negro correponden al valor x1, la primera circunferencia corresponde al valor x2, la segunda circunferencia corresponde al valor de x3, la circunferencia verde corresponde a 60 y la circuenferencia más pequeña corresponde a 100, como se muestra en la siguiente figura.
 
-<p align="center"> <img src=./home/angie/Documents/git/python_dsp/diana_opencv/diana_puntuacion.png> </p>
+<p align="center"> <img src=./imagenes/diana_puntuacion.png> </p>
 
 Como cada segmento de la diana simboliza un valor de puntaje, entonces se crea otra imagen, pero con los valores de puntaje es decir, se toma la imagen original y para este caso, se tomo la matriz roja como referencia, las otras matrices son nulas, entonces la imagen queda de la siguiente manera. 
 
-<p align="center"> <img src=./home/angie/Documents/git/python_dsp/diana_opencv/referencia.png> </p>
+<p align="center"> <img src=./imagenes/referencia.png> </p>
 
 Y así con todos los valores respectivamente, y de esta manera la matriz roja representa el puntaje de esa casilla.
 
 _____
-## Puntuación 
+## Puntuación ´
