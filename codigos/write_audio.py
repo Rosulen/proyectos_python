@@ -7,6 +7,6 @@ import wave
 fs = 8000  # Sample rate
 seconds = 4  # Duration of recording
 print("grabando")
-myrecording = sd.rec(int(seconds * fs), samplerate=fs, channels=1)
+myrecording = sd.rec(int(seconds * fs), samplerate=fs, channels=5)
 sd.wait()  # Wait until recording is finished
-wavio.write('abcd_1.wav', myrecording, fs, sampwidth=3)  # Save as WAV file
+wavio.write('/home/angie/Documents/git/python_dsp/codigos/abcd_1.wav', myrecording, fs, sampwidth=3)  # Save as WAV file

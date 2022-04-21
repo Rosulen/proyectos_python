@@ -182,4 +182,4 @@ Como cada segmento de la diana simboliza un valor de puntaje, entonces se crea o
 Y así con todos los valores respectivamente, y de esta manera la matriz roja representa el puntaje de esa casilla.
 
 _____
-## Puntuación ´
+## Puntuación 
